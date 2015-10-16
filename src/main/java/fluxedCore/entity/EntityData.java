@@ -13,7 +13,7 @@ public class EntityData implements IExtendedEntityProperties {
 
 	@SuppressWarnings("unused")
 	private EntityLivingBase entity;
-	private NBTTagList buffs;
+	private NBTTagList buffs = new NBTTagList();
 
 	public static final String tagKnowledge = "FCBuffs";
 

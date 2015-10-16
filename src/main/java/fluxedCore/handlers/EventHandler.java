@@ -197,10 +197,12 @@ public class EventHandler {
 	public static void syncDataFor(EntityLivingBase entity, EntityPlayerMP to)
 	{
 		EntityData data = EntityData.getInstance(entity);
-		if (data.getBuffs().tagCount() > 0)
+		if (data != null && data.getBuffs().tagCount() > 0)
 		{
 			NBTTagCompound tag = new NBTTagCompound();
+
 			data.saveNBTData(tag);
+			
 			PacketHandler.INSTANCE.sendTo(new MessageDataSync(entity, tag), to);
 		}
 	}

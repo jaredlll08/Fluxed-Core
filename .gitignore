@@ -1,3 +1,5 @@
+/bin/
+
 *.class
 
 # Package Files #
@@ -20,4 +22,4 @@
 /.metadata/*
 *.eml
 usernamecache.json
-/bin/
+

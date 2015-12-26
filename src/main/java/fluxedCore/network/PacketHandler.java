@@ -13,15 +13,16 @@ import fluxedCore.reference.Reference;
 public class PacketHandler {
 
 	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MOD_ID);
-	private static int id = 0;
+	public static int id = 0;
 
 	public static void init() {
+		
+		
+		INSTANCE.registerMessage(MessageBiome.class, MessageBiome.class, id++, Side.CLIENT);
 		INSTANCE.registerMessage(MessageBuffSync.class, MessageBuffSync.class, id++, Side.CLIENT);
 		INSTANCE.registerMessage(MessageSyncBuffs.class, MessageSyncBuffs.class, id++, Side.CLIENT);
 		INSTANCE.registerMessage(MessageBuffUpdate.class, MessageBuffUpdate.class, id++, Side.CLIENT);
 		INSTANCE.registerMessage(MessageDataSync.class, MessageDataSync.class, id++, Side.CLIENT);
-		INSTANCE.registerMessage(MessageBiome.class, MessageBiome.class, id++, Side.CLIENT);
-
 	}
 
 }

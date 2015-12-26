@@ -11,7 +11,7 @@ public interface IProxy {
 
 	public void postInit();
 
-	public World getClientWorld();
+	public World getWorld();
 
 	public EntityPlayer getClientPlayer();
 
@@ -22,4 +22,6 @@ public interface IProxy {
 	public void registerRenderers();
 
 	public void registerGuis();
+	
+	public void registerEvents();
 }

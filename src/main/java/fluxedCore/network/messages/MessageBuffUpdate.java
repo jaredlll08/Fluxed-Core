@@ -1,11 +1,12 @@
 package fluxedCore.network.messages;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import fluxedCore.FluxedCore;
 import fluxedCore.buffs.BuffEffect;
 import fluxedCore.buffs.BuffHelper;
 
@@ -37,8 +38,8 @@ public class MessageBuffUpdate implements IMessage, IMessageHandler<MessageBuffU
 
 	@Override
 	public IMessage onMessage(MessageBuffUpdate message, MessageContext ctx) {
-		EntityLivingBase entity = (EntityLivingBase) FMLClientHandler.instance().getClient().theWorld.getEntityByID(message.entityID);
-		BuffHelper.updateBuff(FMLClientHandler.instance().getClient().theWorld, entity, message.effect);
+		EntityLivingBase entity = (EntityLivingBase) FluxedCore.proxy.getWorld().getEntityByID(message.entityID);
+		BuffHelper.updateBuff(FluxedCore.proxy.getWorld(), entity, message.effect);
 		return null;
 	}
 

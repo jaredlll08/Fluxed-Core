@@ -11,7 +11,8 @@ import cpw.mods.fml.client.FMLClientHandler;
 
 public class RenderUtils {
 
-	public static void drawLine(double x, double y, double x2, double y2, float red, float green, float blue, float lineWidth) {
+	public static void drawLine(double x, double y, double x2, double y2, float red, float green, float blue,
+			float lineWidth) {
 
 		Tessellator var12 = Tessellator.instance;
 		GL11.glPushMatrix();
@@ -29,7 +30,8 @@ public class RenderUtils {
 		GL11.glPopMatrix();
 	}
 
-	public static void drawLine(double x, double y, double z, double x2, double y2, double z2, float red, float green, float blue, float lineWidth) {
+	public static void drawLine(double x, double y, double z, double x2, double y2, double z2, float red, float green,
+			float blue, float lineWidth) {
 
 		Tessellator var12 = Tessellator.instance;
 		GL11.glPushMatrix();
@@ -47,9 +49,33 @@ public class RenderUtils {
 		GL11.glPopMatrix();
 	}
 
-	public static void drawLine(double x, double y, double x2, double y2, float red, float green, float blue, float lineWidth, float fadeSpeed) {
+	public static void drawFace(double x, double y, double z, double x2, double y2, double z2, float red, float green,
+			float blue, float lineWidth) {
+
+		Tessellator var12 = Tessellator.instance;
+		GL11.glPushMatrix();
+		GL11.glLineWidth(lineWidth);
+		GL11.glDisable(3553);
+		var12.startDrawing(3);
+
+		var12.setColorRGBA_F(red, green, blue, 1);
+		var12.addVertex(x, y, z);
+		var12.addVertex(x2, y, z2);
+		var12.addVertex(x2, y2, z2);
+		var12.addVertex(x, y2, z2);
+
+		// var12.addVertex(x2, y2, z2);
+		var12.draw();
+		GL11.glBlendFunc(770, 771);
+		GL11.glDisable(32826);
+		GL11.glEnable(3553);
+		GL11.glPopMatrix();
+	}
+
+	public static void drawLine(double x, double y, double x2, double y2, float red, float green, float blue,
+			float lineWidth, float fadeSpeed) {
 		int count = FMLClientHandler.instance().getClient().thePlayer.ticksExisted;
-		float alpha = 0.3F + MathHelper.sin((float) (count + x)) * 0.3F + 0.3F;
+		float alpha = fadeSpeed + MathHelper.sin((float) (count + x)) * 0.3F + 0.3F;
 
 		Tessellator var12 = Tessellator.instance;
 		GL11.glPushMatrix();
@@ -70,7 +96,8 @@ public class RenderUtils {
 		GL11.glPopMatrix();
 	}
 
-	public static void drawLine(double x, double y, double z, double x2, double y2, double z2, float red, float green, float blue, float lineWidth, float fadeSpeed) {
+	public static void drawLine(double x, double y, double z, double x2, double y2, double z2, float red, float green,
+			float blue, float lineWidth, float fadeSpeed) {
 		int count = FMLClientHandler.instance().getClient().thePlayer.ticksExisted;
 		float alpha = 0.3F + MathHelper.sin((float) (count + x)) * 0.3F + 0.3F;
 
@@ -82,6 +109,7 @@ public class RenderUtils {
 		var12.startDrawing(3);
 
 		var12.setColorRGBA_F(red, green, blue, alpha);
+		var12.setBrightness(0xFFFFFF);
 		var12.addVertex(x, y, z);
 		var12.addVertex(x2, y2, z2);
 
@@ -93,26 +121,37 @@ public class RenderUtils {
 		GL11.glPopMatrix();
 	}
 
-	public static void drawRect(double x, double y, double width, double height, float red, float green, float blue, float lineWidth) {
+	public static void drawRect(double x, double y, double width, double height, float red, float green, float blue,
+			float lineWidth) {
 		drawLine(x, y, x + width, y, red, green, blue, lineWidth);
 		drawLine(x + width, y, x + width, y + width, red, green, blue, lineWidth);
 		drawLine(x + width, y + width, x, y + width, red, green, blue, lineWidth);
 		drawLine(x, y + width, x, y, red, green, blue, lineWidth);
 	}
 
-	public static void drawRect(double x, double y, double z, double width, double height, float red, float green, float blue, float lineWidth) {
+	public static void drawRect(double x, double y, double width, double height, float red, float green, float blue,
+			float lineWidth, float fadeSpeed) {
+		drawLine(x, y, x + width, y, red, green, blue, lineWidth, fadeSpeed);
+		drawLine(x + width, y, x + width, y + width, red, green, blue, lineWidth, fadeSpeed);
+		drawLine(x + width, y + width, x, y + width, red, green, blue, lineWidth, fadeSpeed);
+		drawLine(x, y + width, x, y, red, green, blue, lineWidth, fadeSpeed);
+	}
+
+	public static void drawRect(double x, double y, double z, double width, double height, float red, float green,
+			float blue, float lineWidth) {
 		drawLine(x, y, z, x + width, y, z, red, green, blue, lineWidth);
 		drawLine(x + width, y, z, x + width, y + width, z, red, green, blue, lineWidth);
 		drawLine(x + width, y + width, z, x, y + width, z, red, green, blue, lineWidth);
 		drawLine(x, y + width, z, x, y, z, red, green, blue, lineWidth);
 	}
 
-	public static void drawSquare(double x, double y, double size, float red, float green, float blue, float lineWidth) {
+	public static void drawSquare(double x, double y, double size, float red, float green, float blue,
+			float lineWidth) {
 		drawRect(x, y, size, size, red, green, blue, lineWidth);
 	}
 
-	public static void drawLine(double x, double y, double x2, double y2, float r, float g, float b, float te, boolean wiggle)
-	{
+	public static void drawLine(double x, double y, double x2, double y2, float r, float g, float b, float te,
+			boolean wiggle) {
 		float count = FMLClientHandler.instance().getClient().thePlayer.ticksExisted + new Random().nextFloat() + te;
 
 		Tessellator var12 = Tessellator.instance;
@@ -139,16 +178,14 @@ public class RenderUtils {
 		GL11.glHint(3154, 4354);
 
 		var12.startDrawing(3);
-		for (int a = 0; a <= inc; a++)
-		{
+		for (int a = 0; a <= inc; a++) {
 			float r2 = r;
 			float g2 = g;
 			float b2 = b;
 			float mx = 0.0F;
 			float my = 0.0F;
 			float op = 0.6F;
-			if (wiggle)
-			{
+			if (wiggle) {
 				float phase = a / inc;
 				mx = MathHelper.sin((count + a) / 7.0F) * 5.0F * (1.0F - phase);
 				my = MathHelper.sin((count + a) / 5.0F) * 5.0F * (1.0F - phase);

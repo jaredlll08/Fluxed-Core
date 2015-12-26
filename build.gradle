@@ -17,7 +17,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.0.1"
+version = "1.0.7a"
 group= "getFluxed" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Fluxed-Core"
 
@@ -65,18 +65,26 @@ processResources
         exclude 'mcmod.info'
     }
 	
-	task sourceJar(type: Jar) {
+
+}
+
+task sourceJar(type: Jar) {
     from sourceSets.main.java
     classifier = 'src'
+	 manifest {
+        attributes 'FMLAT': 'fluxedcore_at.cfg'
+    }
 }
 
 task devJar(type: Jar) {
     from sourceSets.main.output
     classifier = 'dev'
+	 manifest {
+        attributes 'FMLAT': 'fluxedcore_at.cfg'
+    }
 }
 
 artifacts {
     archives devJar
     archives sourceJar
-}
 }

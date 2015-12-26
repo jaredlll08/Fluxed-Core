@@ -1,5 +1,6 @@
 package fluxedCore.proxy;
 
+import cpw.mods.fml.server.FMLServerHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -7,8 +8,8 @@ import net.minecraft.world.World;
 public class ServerProxy extends CommonProxy{
 
 	@Override
-	public World getClientWorld() {
-		return null;
+	public World getWorld() {
+		return FMLServerHandler.instance().getServer().getEntityWorld();
 	}
 
 	@Override
@@ -33,6 +34,12 @@ public class ServerProxy extends CommonProxy{
 
 	@Override
 	public void registerGuis() {
+		
+	}
+
+	@Override
+	public void registerEvents() {
+		// TODO Auto-generated method stub
 		
 	}
 }

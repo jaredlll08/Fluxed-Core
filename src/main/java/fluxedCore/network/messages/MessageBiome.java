@@ -34,7 +34,7 @@ public class MessageBiome implements IMessage, IMessageHandler<MessageBiome, IMe
 	}
 
 	public IMessage onMessage (MessageBiome message, MessageContext ctx) {
-		GeneralUtils.setBiomeAt(FluxedCore.proxy.getClientWorld(), message.x, message.z, BiomeGenBase.getBiome(message.biome));
+		GeneralUtils.setBiomeAt(FluxedCore.proxy.getWorld(), message.x, message.z, BiomeGenBase.getBiome(message.biome));
 		return null;
 	}
 }

@@ -1,17 +1,14 @@
 package fluxedCore;
 
-import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import fluxedCore.buffs.BuffHandler;
-import fluxedCore.buffs.BuffHelper;
 import fluxedCore.config.ConfigHandler;
-import fluxedCore.handlers.GuiEventHandler;
+import fluxedCore.items.FBItems;
 import fluxedCore.network.PacketHandler;
 import fluxedCore.proxy.IProxy;
 import fluxedCore.reference.Reference;
@@ -26,17 +23,18 @@ public class FluxedCore {
 	public void preInit(FMLPreInitializationEvent event) {
 		new BuffHandler();
 		new fluxedCore.handlers.EventHandler();
-		FMLCommonHandler.instance().bus().register(new GuiEventHandler());
-		MinecraftForge.EVENT_BUS.register(new GuiEventHandler());
 		ConfigHandler.preInit(event.getSuggestedConfigurationFile());
+		PacketHandler.init();
+		proxy.registerEvents();
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		PacketHandler.init();
+		FBItems.init();
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		
 	}
 }

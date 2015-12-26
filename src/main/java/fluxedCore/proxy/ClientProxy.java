@@ -3,11 +3,15 @@ package fluxedCore.proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.FMLCommonHandler;
+import fluxedCore.handlers.ClientEventHandler;
+import fluxedCore.handlers.GuiEventHandler;
 
 public class ClientProxy extends CommonProxy {
 
 	@Override
-	public World getClientWorld() {
+	public World getWorld() {
 		return Minecraft.getMinecraft().theWorld;
 	}
 
@@ -32,5 +36,14 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerGuis() {
+	}
+
+	@Override
+	public void registerEvents() {
+		FMLCommonHandler.instance().bus().register(new GuiEventHandler());
+		MinecraftForge.EVENT_BUS.register(new GuiEventHandler());		
+		
+		FMLCommonHandler.instance().bus().register(new ClientEventHandler());
+		MinecraftForge.EVENT_BUS.register(new ClientEventHandler());	
 	}
 }

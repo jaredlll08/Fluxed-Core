@@ -1,7 +1,5 @@
 package fluxedCore.util;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
@@ -20,7 +18,7 @@ public class GeneralUtils
 	}
 
 	public static boolean isPlayerPatron(String player) {
-		return player.equalsIgnoreCase("shobu") || player.equalsIgnoreCase("belathus") || player.equalsIgnoreCase("soulrift") || player.equalsIgnoreCase("celes218");
+		return player.equalsIgnoreCase("belathus") || player.equalsIgnoreCase("celes218");
 	}
 
 	public static void setBiomeAt(World world, int x, int z, BiomeGenBase biome) {

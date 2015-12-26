@@ -55,4 +55,7 @@ public class StringUtils {
 		}
 		return formated;
 	}
+	public static String capitalizeFirst(String s){
+		return s.toUpperCase().charAt(0) + s.toLowerCase().substring(1);
+	}
 }

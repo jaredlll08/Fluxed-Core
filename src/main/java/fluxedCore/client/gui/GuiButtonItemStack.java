@@ -22,10 +22,10 @@ public class GuiButtonItemStack extends GuiButton {
 		GL11.glColor4d(1, 1, 1, 1);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		RenderItem.getInstance().renderWithColor = true;
+		
 		RenderHelper.disableStandardItemLighting();
-		RenderItem.getInstance().renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, getStack(), this.xPosition + 2, this.yPosition + 2);
-		RenderItem.getInstance().renderItemOverlayIntoGUI(mc.fontRenderer, mc.renderEngine, getStack(), this.xPosition + 2, this.yPosition + 2);
+		Minecraft.getMinecraft().getRenderItem().renderItemAndEffectIntoGUI( getStack(), this.xPosition + 2, this.yPosition + 2);
+		Minecraft.getMinecraft().getRenderItem().renderItemOverlayIntoGUI(mc.fontRendererObj, getStack(), this.xPosition + 2, this.yPosition + 2, "");
 		RenderHelper.enableStandardItemLighting();
 		GL11.glColor4d(1, 1, 1, 1);
 		GL11.glDisable(GL11.GL_LIGHTING);

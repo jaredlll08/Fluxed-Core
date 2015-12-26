@@ -1,12 +1,11 @@
 package fluxedCore.client.gui.objects;
 
 
+import fluxedCore.client.gui.GuiObject;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
-import fluxedCore.client.gui.GuiObject;
-import fluxedCore.util.RenderUtils;
 
 public class GuiObjectItemButton extends GuiObject {
 
@@ -20,13 +19,13 @@ public class GuiObjectItemButton extends GuiObject {
 	@Override
 	public void renderBackground(Gui gui, int mouseX, int mouseY) {
 //		RenderUtils.drawRect(getXPosition(), getYPosition(), getWidth(), getYPosition() +getHeight(), 0, 0.8f, 0.8f, 0.3f);
-		RenderUtils.drawSquare(getXPosition(), getYPosition(), getWidth(), 0, 1f, 1f, 2f);
+//		RenderUtils.drawSquare(getXPosition(), getYPosition(), getWidth(), 0, 1f, 1f, 2f);
 	}
 
 	@Override
 	public void renderForeground(Gui gui, int mouseX, int mouseY) {
 		RenderHelper.disableStandardItemLighting();
-		RenderItem.getInstance().renderItemIntoGUI(mc.fontRenderer, mc.renderEngine, stack, getXPosition()+2, getYPosition()+2);
+		Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI( stack, getXPosition()+2, getYPosition()+2);
 		RenderHelper.enableStandardItemLighting();
 		
 	}

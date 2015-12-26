@@ -1,12 +1,12 @@
 package fluxedCore.proxy;
 
+import fluxedCore.handlers.ClientEventHandler;
+import fluxedCore.handlers.GuiEventHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.FMLCommonHandler;
-import fluxedCore.handlers.ClientEventHandler;
-import fluxedCore.handlers.GuiEventHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class ClientProxy extends CommonProxy {
 

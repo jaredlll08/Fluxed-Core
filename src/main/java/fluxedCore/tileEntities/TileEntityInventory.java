@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IChatComponent;
 import net.minecraftforge.common.util.Constants;
 
 public abstract class TileEntityInventory extends TileEntity implements IInventory {
@@ -23,17 +24,7 @@ public abstract class TileEntityInventory extends TileEntity implements IInvento
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		return player.getDistanceSq(xCoord + 0.5f, yCoord + 0.5f, zCoord + 0.5f) <= 64;
-	}
-
-	@Override
-	public void openInventory() {
-
-	}
-
-	@Override
-	public void closeInventory() {
-
+		return player.getDistanceSq(pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f) <= 64;
 	}
 
 	@Override
@@ -107,5 +98,23 @@ public abstract class TileEntityInventory extends TileEntity implements IInvento
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
 		items[slot] = stack;
+	}
+
+	@Override
+	public void openInventory(EntityPlayer player) {
+
+	}
+
+	@Override
+	public void closeInventory(EntityPlayer player) {
+
+	}
+
+
+	@Override
+	public void clear() {
+		for (int i = 0; i < items.length; i++) {
+			items[i] = null;
+		}
 	}
 }

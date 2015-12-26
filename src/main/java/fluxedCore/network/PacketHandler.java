@@ -1,14 +1,14 @@
 package fluxedCore.network;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.relauncher.Side;
 import fluxedCore.network.messages.MessageBiome;
 import fluxedCore.network.messages.MessageBuffSync;
 import fluxedCore.network.messages.MessageBuffUpdate;
 import fluxedCore.network.messages.MessageDataSync;
 import fluxedCore.network.messages.MessageSyncBuffs;
 import fluxedCore.reference.Reference;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class PacketHandler {
 

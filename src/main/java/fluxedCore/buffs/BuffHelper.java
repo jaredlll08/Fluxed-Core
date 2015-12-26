@@ -3,19 +3,18 @@ package fluxedCore.buffs;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.world.World;
-
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import fluxedCore.entity.EntityData;
 import fluxedCore.network.PacketHandler;
 import fluxedCore.network.messages.MessageBuffSync;
 import fluxedCore.network.messages.MessageBuffUpdate;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 public class BuffHelper {
 
@@ -75,7 +74,7 @@ public class BuffHelper {
 			effect.writeToNBT(buff);
 			list.appendTag(buff);
 			if (!world.isRemote) {
-				PacketHandler.INSTANCE.sendToAllAround(new MessageBuffSync(entity, effect), new TargetPoint(world.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 128D));
+				PacketHandler.INSTANCE.sendToAllAround(new MessageBuffSync(entity, effect), new TargetPoint(world.provider.getDimensionId(), entity.posX, entity.posY, entity.posZ, 128D));
 			}
 			EntityData.getInstance(entity).setBuffs(list);
 			return true;
@@ -102,12 +101,12 @@ public class BuffHelper {
 			NBTTagCompound buff = new NBTTagCompound();
 			effect.writeToNBT(buff);
 			if (!(effect.getDuration() <= 0)) {
-				list.func_150304_a(count, buff);
+				list.set(count, buff);
 			} else {
 				list.removeTag(count);
 			}
 			if (!world.isRemote) {
-				PacketHandler.INSTANCE.sendToAllAround(new MessageBuffUpdate(entity, effect), new TargetPoint(world.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 128D));
+				PacketHandler.INSTANCE.sendToAllAround(new MessageBuffUpdate(entity, effect), new TargetPoint(world.provider.getDimensionId(), entity.posX, entity.posY, entity.posZ, 128D));
 			}
 			EntityData.getInstance(entity).setBuffs(list);
 		}

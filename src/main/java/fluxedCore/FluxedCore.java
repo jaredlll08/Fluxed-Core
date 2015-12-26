@@ -1,17 +1,16 @@
 package fluxedCore;
 
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import fluxedCore.buffs.BuffHandler;
 import fluxedCore.config.ConfigHandler;
-import fluxedCore.items.FBItems;
 import fluxedCore.network.PacketHandler;
 import fluxedCore.proxy.IProxy;
 import fluxedCore.reference.Reference;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = Reference.MOD_ID, version = Reference.VERSION, dependencies = Reference.DEPENDENCIES, name = Reference.MOD_NAME)
 public class FluxedCore {
@@ -30,7 +29,6 @@ public class FluxedCore {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		FBItems.init();
 	}
 
 	@EventHandler

@@ -1,11 +1,12 @@
 package fluxedCore.util;
 
+import fluxedCore.network.PacketHandler;
+import fluxedCore.network.messages.MessageBiome;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import fluxedCore.network.PacketHandler;
-import fluxedCore.network.messages.MessageBiome;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class GeneralUtils
 {
@@ -21,16 +22,16 @@ public class GeneralUtils
 		return player.equalsIgnoreCase("belathus") || player.equalsIgnoreCase("celes218");
 	}
 
-	public static void setBiomeAt(World world, int x, int z, BiomeGenBase biome) {
+	public static void setBiomeAt(World world,BlockPos pos, BiomeGenBase biome) {
 		if (biome == null) {
 			return;
 		}
-		Chunk chunk = world.getChunkFromBlockCoords(x, z);
+		Chunk chunk = world.getChunkFromBlockCoords(pos);
 		byte[] array = chunk.getBiomeArray();
-		array[((z & 0xF) << 4 | x & 0xF)] = ((byte) (biome.biomeID & 0xFF));
+		array[((pos.getZ() & 0xF) << 4 | pos.getX() & 0xF)] = ((byte) (biome.biomeID & 0xFF));
 		chunk.setBiomeArray(array);
 		if (!world.isRemote) {
-			PacketHandler.INSTANCE.sendToAllAround(new MessageBiome(x, z, biome.biomeID), new NetworkRegistry.TargetPoint(world.provider.dimensionId, x, world.getHeightValue(x, z), z, 32.0D));
+			PacketHandler.INSTANCE.sendToAllAround(new MessageBiome(pos, biome.biomeID), new NetworkRegistry.TargetPoint(world.provider.getDimensionId(), pos.getX(), pos.getY(), pos.getZ(), 32.0D));
 		}
 	}
 

@@ -91,11 +91,6 @@ public abstract class TileEntityInventory extends TileEntity implements IInvento
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
-		return items[slot];
-	}
-
-	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
 		items[slot] = stack;
 	}
@@ -117,4 +112,20 @@ public abstract class TileEntityInventory extends TileEntity implements IInvento
 			items[i] = null;
 		}
 	}
+	
+	public boolean addInventorySlotContents(int i, ItemStack itemstack) {
+		if (getStackInSlot(i) != null) {
+
+			if (getStackInSlot(i).isItemEqual(itemstack)) {
+				getStackInSlot(i).stackSize += itemstack.stackSize;
+			}
+			if (getStackInSlot(i).stackSize > getInventoryStackLimit()) {
+				return false;
+			}
+		} else {
+			setInventorySlotContents(i, itemstack);
+		}
+		return true;
+	}
+
 }

@@ -51,7 +51,7 @@ public class StringUtils {
 			formated = formated.replace("{playerAir}", String.valueOf(player.getAir()));
 		}
 		if (formated.contains("{playerName}")) {
-			formated = formated.replace("{playerName}", String.valueOf(player.getCommandSenderName()));
+			formated = formated.replace("{playerName}", String.valueOf(player.getName()));
 		}
 		return formated;
 	}

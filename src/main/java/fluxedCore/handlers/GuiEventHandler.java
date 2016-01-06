@@ -53,18 +53,10 @@ public class GuiEventHandler {
 
 	@SubscribeEvent
 	public void chat(ClientChatReceivedEvent e) {
-		if (e.message.getFormattedText().toLowerCase().contains("jared")
-				|| e.message.getFormattedText().toLowerCase().contains("jaredlll08")) {
-			EnumChatFormatting[] colours = new EnumChatFormatting[] { EnumChatFormatting.AQUA, EnumChatFormatting.BLACK,
-					EnumChatFormatting.BLUE, EnumChatFormatting.DARK_AQUA, EnumChatFormatting.DARK_BLUE,
-					EnumChatFormatting.DARK_GRAY, EnumChatFormatting.DARK_GREEN, EnumChatFormatting.DARK_PURPLE,
-					EnumChatFormatting.DARK_RED, EnumChatFormatting.GRAY, EnumChatFormatting.GOLD,
-					EnumChatFormatting.GREEN, EnumChatFormatting.LIGHT_PURPLE, EnumChatFormatting.RED,
-					EnumChatFormatting.YELLOW };
+		if (e.message.getFormattedText().toLowerCase().contains("jared") || e.message.getFormattedText().toLowerCase().contains("jaredlll08")) {
+			EnumChatFormatting[] colours = new EnumChatFormatting[] { EnumChatFormatting.AQUA, EnumChatFormatting.BLACK, EnumChatFormatting.BLUE, EnumChatFormatting.DARK_AQUA, EnumChatFormatting.DARK_BLUE, EnumChatFormatting.DARK_GRAY, EnumChatFormatting.DARK_GREEN, EnumChatFormatting.DARK_PURPLE, EnumChatFormatting.DARK_RED, EnumChatFormatting.GRAY, EnumChatFormatting.GOLD, EnumChatFormatting.GREEN, EnumChatFormatting.LIGHT_PURPLE, EnumChatFormatting.RED, EnumChatFormatting.YELLOW };
 			int rand = new Random().nextInt(colours.length);
-			String message = e.message.getFormattedText()
-					.replace("Jared", colours[rand] + "Jared" + EnumChatFormatting.RESET)
-					.replace("Jaredlll08", colours[rand] + "Jared" + EnumChatFormatting.RESET);
+			String message = e.message.getFormattedText().toLowerCase().replace("jaredlll08", colours[rand] + "Jared" + EnumChatFormatting.RESET).replace("jared", colours[rand] + "Jared" + EnumChatFormatting.RESET);
 			e.message = new ChatComponentText(message);
 		}
 		// if (e.displayname.equalsIgnoreCase("Jaredlll08")) {
@@ -84,7 +76,7 @@ public class GuiEventHandler {
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void render(RenderLivingEvent.Pre event) {
-		String s = EnumChatFormatting.getTextWithoutFormattingCodes(event.entity.getCommandSenderName());
+		String s = EnumChatFormatting.getTextWithoutFormattingCodes(event.entity.getName());
 		if (GeneralUtils.isPlayerSpecial(s) || GeneralUtils.isPlayerPatron(s)) {
 			if (!Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
 				if (new Random().nextInt(2) == 0) {
@@ -151,27 +143,19 @@ public class GuiEventHandler {
 	public int prevPage = 0;
 	List<Page> pages = new LinkedList<Page>();
 
-
-
 	public static Point getMouse(GuiContainer container) {
 		Minecraft mc = FMLClientHandler.instance().getClient();
 		ScaledResolution res = new ScaledResolution(mc);
 		Dimension size = new Dimension(res.getScaledWidth(), res.getScaledHeight());
 		Dimension resolution = new Dimension(mc.displayWidth, mc.displayHeight);
-		Point mousepos = new Point(Mouse.getX() * size.width / resolution.width,
-				size.height - Mouse.getY() * size.height / resolution.height - 1);
+		Point mousepos = new Point(Mouse.getX() * size.width / resolution.width, size.height - Mouse.getY() * size.height / resolution.height - 1);
 		int guiLeft = (container.width - container.xSize) / 2;
 		int guiTop = (container.height - container.ySize) / 2;
 		Point relMouse = new Point(mousepos.x - guiLeft, mousepos.y - guiTop);
 		return relMouse;
 	}
 
-
-
-
-
-	private static final ResourceLocation INVENTORY_TEXTURES = new ResourceLocation(
-			"textures/gui/container/inventory.png");
+	private static final ResourceLocation INVENTORY_TEXTURES = new ResourceLocation("textures/gui/container/inventory.png");
 
 	@SubscribeEvent
 	public void onOverlayRender(GuiScreenEvent.DrawScreenEvent event) {
@@ -203,10 +187,8 @@ public class GuiEventHandler {
 
 					if (data.getResourceInformation() != null) {
 						GL11.glEnable(GL11.GL_BLEND);
-						Minecraft.getMinecraft().getTextureManager()
-								.bindTexture(data.getResourceInformation().getLocation());
-						gui.drawTexturedModalRect(x + 6, y + 7, data.getResourceInformation().getUvPair().getX(),
-								data.getResourceInformation().getUvPair().getY(), 18, 18);
+						Minecraft.getMinecraft().getTextureManager().bindTexture(data.getResourceInformation().getLocation());
+						gui.drawTexturedModalRect(x + 6, y + 7, data.getResourceInformation().getUvPair().getX(), data.getResourceInformation().getUvPair().getY(), 18, 18);
 						GL11.glDisable(GL11.GL_BLEND);
 					}
 					Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
@@ -215,8 +197,7 @@ public class GuiEventHandler {
 
 					FontRenderer fnt = Minecraft.getMinecraft().fontRendererObj;
 					fnt.drawStringWithShadow(s, x + 10 + 18, y + 6, 16777215);
-					fnt.drawStringWithShadow(StringUtils.ticksToElapsedTime(effect.getDuration()), x + 10 + 18,
-							y + 6 + 10, 8355711);
+					fnt.drawStringWithShadow(StringUtils.ticksToElapsedTime(effect.getDuration()), x + 10 + 18, y + 6 + 10, 8355711);
 				}
 			}
 		}

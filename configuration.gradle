@@ -1,0 +1,26 @@
+
+// #######################
+// ### Global settings ###
+// #######################
+
+ext.fluxedCoreVersion18 = "1.0.2"
+ext.fluxedCoreVersion17 = "1.0.7"
+
+
+// #######################
+// ### 1.7.10 settings ###
+// #######################
+
+ext.forgeVersion1710 = "1.7.10-10.13.4.1614-1.7.10"
+ext.projects1710 = [
+	'Fluxed-Core-MC1710'
+]
+
+// ####################
+// ### 1.8.9 settings ###
+// ####################
+
+ext.forgeVersion189 = "1.8.9-11.15.0.1684"
+ext.projects189 = [
+	'Fluxed-Core-MC189'
+]
